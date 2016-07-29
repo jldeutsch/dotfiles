@@ -2,13 +2,10 @@
 [[ $- != *i* ]] && return
 
 
-
-
+## --color is only needed for linux
 if [[ "$OSTYPE" == "linux-gnu" ]]; then
   alias ls="ls --color --group-directories-first"
 fi
-
-
 
 
 # python venv stuff
@@ -17,18 +14,15 @@ source /usr/local/bin/virtualenvwrapper.sh
 export PIP_REQUIRE_VIRTUALENV=true # (Optional) Prevent pip from installing packages globally
 
 
-
-
-
-
-
 # aliases
 alias ll="ls -lh" # the --colors is so that ls colors appear in linux; not needed for mac because of CLICOLOR=1
 alias la="ls -ah"
 alias lal="ls -lah"
 alias sls="screen -ls"
 
-# Define Colors
+
+
+## Define Colors -- all lifted from rob's .bash_profile
 # dark colors
 DK=$'\e[0;30m'    # black
 DR=$'\e[0;31m'    # red
@@ -75,7 +69,7 @@ export PS1="\[\033[36m\]\u\[\033[m\]@\[\033[32m\]\h:\[\033[33;1m\]\w\[\033[m\]\$
 export CLICOLOR=1 # this makes ls show colors on a mac
 export LSCOLORS=ExFxBxDxCxegedabagacad # this actually sets the pretty colors on a mac; need LS_COLORS for linux
 
-LS_COLORS=$LS_COLORS:'di=34:ln=35:ex=93:*.ipynb=332:*.csv=32'
+LS_COLORS=$LS_COLORS:'di=1;34:ln=35:*.ipynb=33:*.csv=32'
 export LS_COLORS
 
 
