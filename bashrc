@@ -72,7 +72,9 @@ function git_color() {
 
 
 # export PS1="\[\033[36m\]\u\[\033[m\]@\[\033[32m\]\h:\[\033[33;1m\]\w\[\033[m\]\$ "  # this does the bash line colors and stuff
-export PS1="\[\033[36m\]\u\[\033[m\]@\[\033[32m\]\h:\[$DY\]\w\[\$(git_color)\]\$(__git_ps1)\[$ENDCOLOR\]:\$ " # this is rob's bash line
+export PS1="\[\033[36m\]\u\[\033[m\]@\[\033[33m\]\h:\[$LB\]\w\[\$(git_color)\]\$(__git_ps1)\[$ENDCOLOR\]:\$ " # this is rob's bash line
+
+# export PS1="\[\033[36m\]\u\[\033[m\]@\[\033[32m\]\h:\[$LB\]\w\[\$(git_color)\]\$(__git_ps1)\[$ENDCOLOR\]:\$ " # backup of current best
 
 # export PS1="\[\033[36m\]\u\[\033[m\]@\[\033[32m\]\h:\[\033[33;1m\]\w\[\033[m\]\$ " # combining the two bash lines
 
