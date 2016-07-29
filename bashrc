@@ -1,4 +1,4 @@
-# If not running interactively, don't do anything!
+# If not running interactively, don't do anything
 [[ $- != *i* ]] && return
 
 
@@ -49,7 +49,7 @@ LW=$'\e[1;37m'    # white
 ENDCOLOR=$'\e[0m'  # End color
 
 # Git status color
-function git_color() {
+function git_color {
     local git_status="$(git status 2> /dev/null)"
     
     if [[ ! $git_status =~ "working directory clean" ]]; then
@@ -65,16 +65,24 @@ function git_color() {
     fi
 }
 
+function console_pipes {
+	local git_status=$(git status 2> /dev/null | wc -l)
+	
+	if [ $git_status -eq  0 ]; then
+		echo -e  
+	else
+		echo -e $DB --  
+	fi
+}
 
-
+console_pipes
 
 
 
 # export PS1="\[\033[36m\]\u\[\033[m\]@\[\033[32m\]\h:\[\033[33;1m\]\w\[\033[m\]\$ "  # this does the bash line colors and stuff
-export PS1="\[\033[36m\]\u\[\033[m\]@\[\033[33m\]\h:\[$DY\]\w\[\$(git_color)\]\$(__git_ps1)\[$ENDCOLOR\]:\$ " # this is rob's bash line
+export PS1="\[\033[$DC\]\u\[\033[$DW\]@\[\033[$DC\]\h:\[$DY\]\w\$(console_pipes)\[\$(git_color)\]\$(__git_ps1)\[$ENDCOLOR\]:\$ " # this is rob's bash line
 
-# export PS1="\[\033[36m\]\u\[\033[m\]@\[\033[33m\]\h:\[$DY\]\w\[\$(git_color)\]\$(__git_ps1)\[$ENDCOLOR\]:\$ " ## backup of current best
-
+# export PS1="\[\033[$DC\]\u\[\033[m\]@\[\033[$DC\]\h:\[$DY\]\w\[\$(git_color)\]\$(__git_ps1)\[$ENDCOLOR\]:\$ " ## backup
 # export PS1="\[\033[36m\]\u\[\033[m\]@\[\033[32m\]\h:\[\033[33;1m\]\w\[\033[m\]\$ " # combining the two bash lines
 
 export CLICOLOR=1 # this makes ls show colors on a mac
