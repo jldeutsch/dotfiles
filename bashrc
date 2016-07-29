@@ -27,7 +27,6 @@ alias lal="ls -lah"
 alias sls="screen -ls"
 
 
-
 ## Define Colors -- all lifted from rob's .bash_profile
 # dark colors
 DK=$'\e[0;30m'    # black
