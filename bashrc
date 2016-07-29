@@ -5,6 +5,12 @@
 ## --color is only needed for linux
 if [[ "$OSTYPE" == "linux-gnu" ]]; then
   alias ls="ls --color --group-directories-first"
+elif [[ "$OSTYPE" == "darwin"* ]]; then
+  # export EDITOR="/usr/local/bin/vim"
+  # setup bash_completion this will fail if brew isn't installed
+  . `brew --prefix`/etc/bash_completion
+else
+  echo "Unrecognized OS some settings not set."
 fi
 
 
@@ -65,7 +71,10 @@ function git_color() {
 
 
 
-export PS1="\[\033[36m\]\u\[\033[m\]@\[\033[32m\]\h:\[\033[33;1m\]\w\[\033[m\]\$ "  # this does the username colors and stuff
+# export PS1="\[\033[36m\]\u\[\033[m\]@\[\033[32m\]\h:\[\033[33;1m\]\w\[\033[m\]\$ "  # this does the bash line colors and stuff
+export PS1="\[\033[36m\]\u\[\033[m\]@\[\033[32m\]\h:\[$DY\]\w\[\$(git_color)\]\$(__git_ps1)\[$ENDCOLOR\]:\$ " # this is rob's bash line
+
+# export PS1="\[\033[36m\]\u\[\033[m\]@\[\033[32m\]\h:\[\033[33;1m\]\w\[\033[m\]\$ " # combining the two bash lines
 
 export CLICOLOR=1 # this makes ls show colors on a mac
 export LSCOLORS=ExFxBxDxCxegedabagacad # specifies colors for mac
