@@ -69,7 +69,7 @@ export PS1="\[\033[36m\]\u\[\033[m\]@\[\033[32m\]\h:\[\033[33;1m\]\w\[\033[m\]\$
 export CLICOLOR=1 # this makes ls show colors on a mac
 export LSCOLORS=ExFxBxDxCxegedabagacad # this actually sets the pretty colors on a mac; need LS_COLORS for linux
 
-LS_COLORS=$LS_COLORS:'di=1;34:ln=35:*.ipynb=33:*.csv=32'
+LS_COLORS=$LS_COLORS:'di=1;34:ln=35:*.ipynb=33:*.csv=31'
 export LS_COLORS
 
 
