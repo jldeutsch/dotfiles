@@ -56,7 +56,7 @@ function git_color() {
     if [[ ! $git_status =~ "working directory clean" ]]; then
         echo -e $DR
     elif [[ $git_status =~ "Your branch is ahead of" ]]; then
-        echo -e $DM
+        echo -e $DC
     elif [[ $git_status =~ "Your branch is behind" ]]; then
         echo -e $DB
     elif [[ $git_status =~ "nothing to commit" ]]; then
