@@ -75,21 +75,12 @@ function console_pipes {
 	fi
 }
 
-console_pipes
 
-
-
-# export PS1="\[\033[36m\]\u\[\033[m\]@\[\033[32m\]\h:\[\033[33;1m\]\w\[\033[m\]\$ "  # this does the bash line colors and stuff
-export PS1="\[\033[$DC\]\u\[\033[$DW\]@\[\033[$DC\]\h:\[$DY\]\w\$(console_pipes)\[\$(git_color)\]\$(__git_ps1)\[$ENDCOLOR\]:\$ " # this is rob's bash line
-
-# export PS1="\[\033[$DC\]\u\[\033[m\]@\[\033[$DC\]\h:\[$DY\]\w\[\$(git_color)\]\$(__git_ps1)\[$ENDCOLOR\]:\$ " ## backup
-# export PS1="\[\033[36m\]\u\[\033[m\]@\[\033[32m\]\h:\[\033[33;1m\]\w\[\033[m\]\$ " # combining the two bash lines
+export PS1="\[\033[$DC\]\u\[\033[$DW\]@\[\033[$DC\]\h:\[$DY\]\w\$(console_pipes)\[\$(git_color)\]\$(__git_ps1)\[$ENDCOLOR\]:\$ " 
 
 export CLICOLOR=1 # this makes ls show colors on a mac
 export LSCOLORS=ExFxBxDxCxegedabagacad # specifies colors for mac
 
 export LS_COLORS=$LS_COLORS:'di=1;34:ln=35:*.py=31:*.csv=33' # specifies colors for linux
-
-
 
 
