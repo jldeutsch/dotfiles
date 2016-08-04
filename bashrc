@@ -76,7 +76,7 @@ function console_pipes {
 }
 
 
-export PS1="\[\033[$DC\]\u\[\033[$DW\]@\[\033[$DG\]\h:\[$DY\]\w\$(console_pipes)\[\$(git_color)\]\$(__git_ps1)\[$ENDCOLOR\]:\$ " 
+export PS1="\[\033[$DC\]\u\[\033[$DW\]@\[\033[$DC\]\h:\[$DY\]\w\$(console_pipes)\[\$(git_color)\]\$(__git_ps1)\[$ENDCOLOR\]:\$ " 
 
 export CLICOLOR=1 # this makes ls show colors on a mac
 export LSCOLORS=ExFxBxDxCxegedabagacad # specifies colors for mac
