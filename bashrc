@@ -1,10 +1,10 @@
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
 
-
 ## --color is only needed for linux
 if [[ "$OSTYPE" == "linux-gnu" ]]; then
   alias ls="ls --color --group-directories-first"
+  source /etc/bash_completion.d/git  
 elif [[ "$OSTYPE" == "darwin"* ]]; then
   # export EDITOR="/usr/local/bin/vim"
   # setup bash_completion this will fail if brew isn't installed
