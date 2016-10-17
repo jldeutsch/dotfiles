@@ -81,6 +81,6 @@ export PS1="\[\033[$DC\]\u\[\033[$DW\]@\[\033[$DG\]\h:\[$DY\]\w\$(console_pipes)
 export CLICOLOR=1 # this makes ls show colors on a mac
 export LSCOLORS=ExFxBxDxCxegedabagacad # specifies colors for mac
 
-export LS_COLORS=$LS_COLORS:'di=1;34:ln=35:*.py=31:*.csv=33' # specifies colors for linux
+export LS_COLORS=$LS_COLORS:'di=1;34:ln=36:*.py=31:*.txt=33:*.ipynb=35:*.csv=33' # specifies colors for linux
 
 
