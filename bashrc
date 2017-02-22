@@ -25,6 +25,9 @@ alias ll="ls -lh" # the --colors is so that ls colors appear in linux; not neede
 alias la="ls -ah"
 alias lal="ls -lah"
 alias sls="screen -ls"
+alias pycclean='find ./ -name "*.pyc" -delete'
+
+
 
 
 ## Define Colors -- all lifted from rob's .bash_profile
@@ -49,23 +52,23 @@ LW=$'\e[1;37m'    # white
 ENDCOLOR=$'\e[0m'  # End color
 
 # Git status color
-function git_color {
+function git_color() {
     local git_status="$(git status 2> /dev/null)"
     
-    if [[ ! $git_status =~ "working directory clean" ]]; then
-        echo -e $DR
-    elif [[ $git_status =~ "Your branch is ahead of" ]]; then
+    # Add second catch for new git output
+    if [[ $git_status =~ "Your branch is ahead of" ]]; then
         echo -e $DY
     elif [[ $git_status =~ "Your branch is behind" ]]; then
         echo -e $DM
     elif [[ $git_status =~ "nothing to commit" ]]; then
         echo -e $DG
     else 
-        echo -en $DG
+        echo -en $DR
     fi
 }
 
-function console_pipes {
+
+function console_swag {
 	local git_status=$(git status 2> /dev/null | wc -l)
 	
 	if [ $git_status -eq  0 ]; then
@@ -76,7 +79,7 @@ function console_pipes {
 }
 
 
-export PS1="\[\033[$DC\]\u\[\033[$DW\]@\[\033[$DG\]\h:\[$DY\]\w\$(console_pipes)\[\$(git_color)\]\$(__git_ps1)\[$ENDCOLOR\]:\$ " 
+export PS1="\[\033[$DC\]\u\[\033[$DW\]@\[\033[$DG\]\h:\[$DY\]\w\$(console_swag)\[\$(git_color)\]\$(__git_ps1)\[$ENDCOLOR\]:\$ " 
 
 export CLICOLOR=1 # this makes ls show colors on a mac
 export LSCOLORS=ExFxBxDxCxegedabagacad # specifies colors for mac
