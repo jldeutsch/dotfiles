@@ -38,56 +38,66 @@ alias pycclean='find ./ -name "*.pyc" -delete'
 
 
 
-## Define Colors -- all lifted from rob's .bash_profile
-# dark colors
-DK=$'\e[0;30m'    # black
-DR=$'\e[0;31m'    # red
-DG=$'\e[0;32m'    # green
-DY=$'\e[0;33m'    # yellow
-DB=$'\e[0;34m'    # blue
-DM=$'\e[0;35m'    # magenta
-DC=$'\e[0;36m'    # cyan
-DW=$'\e[0;37m'    # white
-# light colors
-LK=$'\e[1;30m'    # black
-LR=$'\e[1;31m'    # red
-LG=$'\e[1;32m'    # green
-LY=$'\e[1;33m'    # yellow
-LB=$'\e[1;34m'    # blue
-LM=$'\e[1;35m'    # magenta
-LC=$'\e[1;36m'    # cyan
-LW=$'\e[1;37m'    # white
+
+## colors taken from Taylor McGann's blog
+# regular colors
+RK=$'\033[0;30m' # Black
+RR=$'\033[0;31m' # Red
+RG=$'\033[0;32m' # Green
+RY=$'\033[0;33m' # Yellow
+RB=$'\033[0;34m' # Blue
+RP=$'\033[0;35m' # Purple
+RC=$'\033[0;36m' # Cyan
+RW=$'\033[0;37m' # White
+
+# High Intensty
+HK=$'\033[0;90m' # Black
+HR=$'\033[0;91m' # Red
+HG=$'\033[0;92m' # Green
+HY=$'\033[0;93m' # Yellow
+HB=$'\033[0;94m' # Blue
+HP=$'\033[0;95m' # Purple
+HC=$'\033[0;96m' # Cyan
+HW=$'\033[0;97m' # White
+
 ENDCOLOR=$'\e[0m'  # End color
+
 
 # Git status color
 function git_color() {
     local git_status="$(git status 2> /dev/null)"
-    
+    local git_prompt="git"
+
+
     # Add second catch for new git output
-    if [[ $git_status =~ "Your branch is ahead of" ]]; then
-        echo -e $DY
+    if [[ ${#git_status} -eq 0 ]]; then
+        echo -e 
+    elif [[ $git_status =~ "Your branch is ahead of" ]]; then
+        echo -e $DY $git_prompt
     elif [[ $git_status =~ "Your branch is behind" ]]; then
-        echo -e $DM
+        echo -e $DM $git_prompt
     elif [[ $git_status =~ "nothing to commit" ]]; then
-        echo -e $DG
+        echo -e $DG $git_prompt
     else 
-        echo -en $DR
+        echo -en $DR $git_prompt
     fi
 }
 
 
 function console_swag {
-	local git_status=$(git status 2> /dev/null | wc -l)
+	local git_status="$(git status 2> /dev/null)"
 	
-	if [ $git_status -eq  0 ]; then
-		echo -e  
+	if [[ ${#git_status} -eq 0 ]]; then
+		echo -e
 	else
-		echo -e $DB --  
+		echo -e $HB --  
 	fi
 }
 
 
-export PS1="\[\033[$DC\]\u\[\033[$DW\]@\[\033[$DG\]\h:\[$DY\]\w\[$ENDCOLOR\]:\$ " 
+# export PS1="\[\033[$DC\]\u\[\033[$DW\]@\[\033[$DG\]\h:\[$DY\]\w\[$ENDCOLOR\]\$(console_swag)\[\$(git_color)\]\$ " 
+export PS1="\[$HC\]\u\[$HW\]@\[$HG\]\h\[$RC\]: \[$HY\]\w\$(console_swag)\$(git_color)\[$ENDCOLOR\]\n\$"
+
 
 export CLICOLOR=1 # this makes ls show colors on a mac
 export LSCOLORS=ExFxBxDxCxegedabagacad # specifies colors for mac
