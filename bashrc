@@ -71,15 +71,15 @@ function git_color() {
 
     # Add second catch for new git output
     if [[ ${#git_status} -eq 0 ]]; then
-        echo -e 
+        echo -en 
     elif [[ $git_status =~ "Your branch is ahead of" ]]; then
-        echo -e $DY $git_prompt
+        echo -en "${HY} $git_prompt"
     elif [[ $git_status =~ "Your branch is behind" ]]; then
-        echo -e $DM $git_prompt
+        echo -en "${HM} $git_prompt"
     elif [[ $git_status =~ "nothing to commit" ]]; then
-        echo -e $DG $git_prompt
+        echo -en "${HG} $git_prompt"
     else 
-        echo -en $DR $git_prompt
+        echo -en "${HR} $git_prompt"
     fi
 }
 
