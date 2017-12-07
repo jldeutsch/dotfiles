@@ -5,20 +5,28 @@
 if [[ "$OSTYPE" == "linux-gnu" ]]; then
   alias ls="ls --color --group-directories-first"
 #  source /etc/bash_completion.d/git  
-elif [[ "$OSTYPE" == "darwin"* ]]; then
+elif [[ "$OSTYPE" == "darwin"* ]]; then   ## this means i'm on a mac
   # export EDITOR="/usr/local/bin/vim"
   # setup bash_completion this will fail if brew isn't installed
-  . `brew --prefix`/etc/bash_completion
+
+  brew_loc=$(which brew)
+  if [[	${#brew_loc}>0 ]]; then
+    . $(brew --prefix)/etc/bash_completion
+#  else
+#    echo 'brew no found, cannot set up bash completion'
+  fi
 else
   echo "Unrecognized OS some settings not set."
 fi
 
 
 # python venv stuff
-export WORKON_HOME=$HOME/.virtualenvs # Where virtualenv will store the virtual environments
-source /usr/local/bin/virtualenvwrapper.sh
-export PIP_REQUIRE_VIRTUALENV=true # (Optional) Prevent pip from installing packages globally
-
+venv_loc=$(which virtualenv)
+if [[ ${#venv_loc}>0 ]]; then
+  export WORKON_HOME=$HOME/.virtualenvs # Where virtualenv will store the virtual environments
+  source /usr/local/bin/virtualenvwrapper.sh
+  export PIP_REQUIRE_VIRTUALENV=true # (Optional) Prevent pip from installing packages globally
+fi
 
 # aliases
 alias ll="ls -lh" # the --colors is so that ls colors appear in linux; not needed for mac because of CLICOLOR=1
@@ -79,7 +87,7 @@ function console_swag {
 }
 
 
-export PS1="\[\033[$DC\]\u\[\033[$DW\]@\[\033[$DG\]\h:\[$DY\]\w\$(console_swag)\[\$(git_color)\]\$(__git_ps1)\[$ENDCOLOR\]:\$ " 
+export PS1="\[\033[$DC\]\u\[\033[$DW\]@\[\033[$DG\]\h:\[$DY\]\w\[$ENDCOLOR\]:\$ " 
 
 export CLICOLOR=1 # this makes ls show colors on a mac
 export LSCOLORS=ExFxBxDxCxegedabagacad # specifies colors for mac
