@@ -66,20 +66,21 @@ ENDCOLOR=$'\e[0m'  # End color
 # Git status color
 function git_color() {
     local git_status="$(git status 2> /dev/null)"
-    local git_prompt="git"
-
 
     # Add second catch for new git output
     if [[ ${#git_status} -eq 0 ]]; then
-        echo -en 
-    elif [[ $git_status =~ "Your branch is ahead of" ]]; then
-        echo -en "${HY} $git_prompt"
-    elif [[ $git_status =~ "Your branch is behind" ]]; then
-        echo -en "${HM} $git_prompt"
-    elif [[ $git_status =~ "nothing to commit" ]]; then
-        echo -en "${HG} $git_prompt"
-    else 
-        echo -en "${HR} $git_prompt"
+        echo -en
+    else
+        local git_prompt="git"
+        if [[ $git_status =~ "Your branch is ahead of" ]]; then
+           echo -en "${HY} $git_prompt"
+        elif [[ $git_status =~ "Your branch is behind" ]]; then
+           echo -en "${HM} $git_prompt"
+        elif [[ $git_status =~ "nothing to commit" ]]; then
+           echo -en "${HG} $git_prompt"
+        else 
+           echo -en "${HR} $git_prompt"
+        fi
     fi
 }
 
