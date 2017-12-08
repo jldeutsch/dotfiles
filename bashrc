@@ -40,25 +40,25 @@ alias cdd="cd ../.."
 
 
 ## colors taken from Taylor McGann's blog
-# regular colors
-RK=$'\033[0;30m' # Black
-RR=$'\033[0;31m' # Red
-RG=$'\033[0;32m' # Green
-RY=$'\033[0;33m' # Yellow
-RB=$'\033[0;34m' # Blue
-RP=$'\033[0;35m' # Purple
-RC=$'\033[0;36m' # Cyan
-RW=$'\033[0;37m' # White
+# light colors
+LK=$'\033[0;30m' # Black
+LR=$'\033[0;31m' # Red
+LG=$'\033[0;32m' # Green
+LY=$'\033[0;33m' # Yellow
+LB=$'\033[0;34m' # Blue
+LP=$'\033[0;35m' # Purple
+LC=$'\033[0;36m' # Cyan
+LW=$'\033[0;37m' # White
 
-# High Intensty
-HK=$'\033[0;90m' # Black
-HR=$'\033[0;91m' # Red
-HG=$'\033[0;92m' # Green
-HY=$'\033[0;93m' # Yellow
-HB=$'\033[0;94m' # Blue
-HP=$'\033[0;95m' # Purple
-HC=$'\033[0;96m' # Cyan
-HW=$'\033[0;97m' # White
+# dark colors
+DK=$'\033[0;90m' # Black
+DR=$'\033[0;91m' # Red
+DG=$'\033[0;92m' # Green
+DY=$'\033[0;93m' # Yellow
+DB=$'\033[0;94m' # Blue
+DP=$'\033[0;95m' # Purple
+DC=$'\033[0;96m' # Cyan
+DW=$'\033[0;97m' # White
 
 ENDCOLOR=$'\e[0m'  # End color
 
@@ -66,38 +66,31 @@ ENDCOLOR=$'\e[0m'  # End color
 # Git status color
 function git_color() {
     local git_status="$(git status 2> /dev/null)"
-
-    # Add second catch for new git output
-    if [[ ${#git_status} -eq 0 ]]; then
-        echo -en
-    else
+    if [[ ${#git_status}>0 ]]; then
 	local git_prompt="($(git symbolic-ref --short -q HEAD))"
         
 	if [[ $git_status =~ "Your branch is ahead of" ]]; then
-           echo -en "${HY} $git_prompt"
+           echo -en "${DY} $git_prompt"
         elif [[ $git_status =~ "Your branch is behind" ]]; then
-           echo -en "${HM} $git_prompt"
+           echo -en "${DM} $git_prompt"
         elif [[ $git_status =~ "nothing to commit" ]]; then
-           echo -en "${HG} $git_prompt"
+           echo -en "${DG} $git_prompt"
         else 
-           echo -en "${HR} $git_prompt"
-        fi
+           echo -en "${DR} $git_prompt"
+   	fi
     fi
 }
-
 
 function console_swag {
 	local git_status="$(git status 2> /dev/null)"
 	
-	if [[ ${#git_status} -eq 0 ]]; then
-		echo -e
-	else
-		echo -e $HB --  
+	if [[ ${#git_status}>0 ]]; then
+		echo -e $DB --  
 	fi
 }
 
 
-export PS1="\[$HC\]\u\[$HW\]@\[$HG\]\h\[$RC\]: \[$HY\]\w\$(console_swag)\$(git_color)\[$ENDCOLOR\]\n\$"
+export PS1="\[$DC\]\u\[$DW\]@\[$DG\]\h\[$LC\]: \[$DY\]\w\$(console_swag)\$(git_color)\[$ENDCOLOR\]\n\$"
 
 export CLICOLOR=1 # this makes ls show colors on a mac
 export LSCOLORS=ExFxBxDxCxegedabagacad # specifies colors for mac
