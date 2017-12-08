@@ -34,8 +34,8 @@ alias la="ls -ah"
 alias lal="ls -lah"
 alias sls="screen -ls"
 alias pycclean='find ./ -name "*.pyc" -delete'
-
-
+alias cll="clear; ls -lh"
+alias cdd="cd ../.."
 
 
 
