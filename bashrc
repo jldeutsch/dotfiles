@@ -3,29 +3,29 @@
 
 ## --color is only needed for linux
 if [[ "$OSTYPE" == "linux-gnu" ]]; then
-  alias ls="ls --color --group-directories-first"
-#  source /etc/bash_completion.d/git  
-elif [[ "$OSTYPE" == "darwin"* ]]; then   ## this means i'm on a mac
-  # export EDITOR="/usr/local/bin/vim"
-  # setup bash_completion this will fail if brew isn't installed
+	alias ls="ls --color --group-directories-first"
+#	source /etc/bash_completion.d/git  
+elif [[ "$OSTYPE" == "darwin"* ]]; then
+ #	export EDITOR="/usr/local/bin/vim"
+ #	setup bash_completion this will fail if brew isn't installed
 
-  brew_loc=$(which brew)
-  if [[	${#brew_loc}>0 ]]; then
-    . $(brew --prefix)/etc/bash_completion
-#  else
-#    echo 'brew no found, cannot set up bash completion'
-  fi
+ 	brew_loc=$(which brew)
+	if [[	${#brew_loc}>0 ]]; then
+		. $(brew --prefix)/etc/bash_completion
+#	else
+#		echo 'brew no found, cannot set up bash completion'
+	fi
 else
-  echo "Unrecognized OS some settings not set."
+	echo "Unrecognized OS some settings not set."
 fi
 
 
 # python venv stuff
 venv_loc=$(which virtualenv)
 if [[ ${#venv_loc}>0 ]]; then
-  export WORKON_HOME=$HOME/.virtualenvs # Where virtualenv will store the virtual environments
-  source /usr/local/bin/virtualenvwrapper.sh
-  export PIP_REQUIRE_VIRTUALENV=true # (Optional) Prevent pip from installing packages globally
+	export WORKON_HOME=$HOME/.virtualenvs # Where virtualenv will store the virtual environments
+	source /usr/local/bin/virtualenvwrapper.sh
+	export PIP_REQUIRE_VIRTUALENV=true # (Optional) Prevent pip from installing packages globally
 fi
 
 # aliases
@@ -71,8 +71,9 @@ function git_color() {
     if [[ ${#git_status} -eq 0 ]]; then
         echo -en
     else
-        local git_prompt="git"
-        if [[ $git_status =~ "Your branch is ahead of" ]]; then
+	local git_prompt="($(git symbolic-ref --short -q HEAD))"
+        
+	if [[ $git_status =~ "Your branch is ahead of" ]]; then
            echo -en "${HY} $git_prompt"
         elif [[ $git_status =~ "Your branch is behind" ]]; then
            echo -en "${HM} $git_prompt"
@@ -96,9 +97,7 @@ function console_swag {
 }
 
 
-# export PS1="\[\033[$DC\]\u\[\033[$DW\]@\[\033[$DG\]\h:\[$DY\]\w\[$ENDCOLOR\]\$(console_swag)\[\$(git_color)\]\$ " 
 export PS1="\[$HC\]\u\[$HW\]@\[$HG\]\h\[$RC\]: \[$HY\]\w\$(console_swag)\$(git_color)\[$ENDCOLOR\]\n\$"
-
 
 export CLICOLOR=1 # this makes ls show colors on a mac
 export LSCOLORS=ExFxBxDxCxegedabagacad # specifies colors for mac
