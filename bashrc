@@ -72,7 +72,7 @@ function git_color() {
 	if [[ $git_status =~ "Your branch is ahead of" ]]; then
            echo -en "${DY} $git_prompt"
         elif [[ $git_status =~ "Your branch is behind" ]]; then
-           echo -en "${DM} $git_prompt"
+           echo -en "${DP} $git_prompt"
         elif [[ $git_status =~ "nothing to commit" ]]; then
            echo -en "${DG} $git_prompt"
         else 
