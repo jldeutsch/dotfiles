@@ -77,7 +77,7 @@ function git_color() {
         if [[ ${#head_symref}>0 ]]; then  # so we're not in detached head
 		git_prompt="$head_symref"
 	else
-		git_prompt="$(git rev-parse --short HEAD)"  # getting commit hash
+		git_prompt="$(git rev-parse HEAD)"  # getting commit hash
 	fi
 
 	if [[ $git_status =~ "Your branch is ahead of" ]]; then
