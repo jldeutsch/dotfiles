@@ -37,6 +37,11 @@ alias pycclean='find ./ -name "*.pyc" -delete'
 alias cll="clear; ls -lh"
 alias cdd="cd ../.."
 
+# this takes a variable number of file names and combines them in first argument
+concat () {
+	cat "$@" > $1
+}
+
 
 
 ## colors taken from Taylor McGann's blog
@@ -96,7 +101,7 @@ function console_swag {
 }
 
 
-export PS1="\[$DC\]\u\[$DW\]@\[$DG\]\h\[$LC\]: \[$DY\]\w\$(console_swag)\$(git_color)\[$ENDCOLOR\]\n\$"
+export PS1="\[$DC\]\u\[$DW\]@\[$DG\]\h\[$LC\]: \[$DY\]\w\$(console_swag)\$(git_color)\[$DY\]\n\$\[$ENDCOLOR\] "
 
 export CLICOLOR=1 # this makes ls show colors on a mac
 export LSCOLORS=ExFxBxDxCxegedabagacad # specifies colors for mac
