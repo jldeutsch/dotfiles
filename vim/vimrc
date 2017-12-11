@@ -1,2 +1,5 @@
 filetype plugin indent on
 syntax on
+colorscheme base16-default-dark
+
+
