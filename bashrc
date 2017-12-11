@@ -6,15 +6,15 @@ if [[ "$OSTYPE" == "linux-gnu" ]]; then
 	alias ls="ls --color --group-directories-first"
 #	source /etc/bash_completion.d/git  
 elif [[ "$OSTYPE" == "darwin"* ]]; then
- #	export EDITOR="/usr/local/bin/vim"
- #	setup bash_completion this will fail if brew isn't installed
-
- 	brew_loc=$(which brew)
+ 	brew_loc=$(which brew)  # checking to see if homebrew is installed
 	if [[	${#brew_loc}>0 ]]; then
-		. $(brew --prefix)/etc/bash_completion
-#	else
-#		echo 'brew no found, cannot set up bash completion'
+		source $(brew --prefix)/etc/bash_completion
 	fi
+
+	if [ -f ~/.git-completion.bash ]; then
+		source  ~/.git-completion.bash
+	fi
+
 else
 	echo "Unrecognized OS some settings not set."
 fi
