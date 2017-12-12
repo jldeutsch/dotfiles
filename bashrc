@@ -78,8 +78,7 @@ function git_color() {
 		git_prompt="$head_symref"
 	else
 		local git_hash="$(git rev-parse HEAD)"
-		echo $git_hash
-		git_prompt="$(git rev-parse HEAD)"  # getting commit hash
+		git_prompt="$git_hash"  # getting commit hash
 	fi
 
 	if [[ $git_status =~ "Your branch is ahead of" ]]; then
