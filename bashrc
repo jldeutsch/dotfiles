@@ -77,6 +77,8 @@ function git_color() {
         if [[ ${#head_symref}>0 ]]; then  # so we're not in detached head
 		git_prompt="$head_symref"
 	else
+		local git_hash="$(git rev-parse HEAD)"
+		echo $git_hash
 		git_prompt="$(git rev-parse HEAD)"  # getting commit hash
 	fi
 
