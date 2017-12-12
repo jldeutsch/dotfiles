@@ -77,7 +77,7 @@ function git_color() {
         if [[ ${#head_symref}>0 ]]; then  # so we're not in detached head
 		git_prompt="$head_symref"
 	else
-		local git_hash="$(git rev-parse HEAD)"
+		local git_hash="$(git rev-parse HEAD 2> /dev/null)"
 		git_prompt="$git_hash"  # getting commit hash
 	fi
 
@@ -110,8 +110,8 @@ function det_head() {
 }
 
 
-# export PS1="\[$DC\]\u\[$DW\]@\[$DG\]\h\[$LC\]: \[$DY\]\w\$(console_swag)\$(git_color)\[$DY\]\n\$\[$ENDCOLOR\] "
-export PS1="\[$DB\]\u@\h\[$DW\]:\$(det_head)\n "
+ export PS1="\[$DC\]\u\[$DW\]@\[$DG\]\h\[$LC\]: \[$DY\]\w\$(console_swag)\$(git_color)\[$DY\]\n\$\[$ENDCOLOR\] "
+# export PS1="\[$DB\]\u@\h\[$DW\]:\$(det_head)\n "
 
 export CLICOLOR=1 # this makes ls show colors on a mac
 export LSCOLORS=ExFxBxDxCxegedabagacad # specifies colors for mac
