@@ -72,23 +72,22 @@ ENDCOLOR=$'\e[0m'  # End color
 function git_color() {
     local git_status="$(git status 2> /dev/null)"
     if [[ ${#git_status}>0 ]]; then  # we're in a git repo
-	local head_symref="($(git symbolic-ref --short -q HEAD))"
+	local head_symref="$(git symbolic-ref --short -q HEAD)"
 	local git_prompt=""
         if [[ ${#head_symref}>0 ]]; then  # so we're not in detached head
 		git_prompt="$head_symref"
 	else
-		local git_hash="$(git rev-parse HEAD 2> /dev/null)"
-		git_prompt="$git_hash"  # getting commit hash
+		git_prompt="$(git rev-parse HEAD)"
 	fi
 
 	if [[ $git_status =~ "Your branch is ahead of" ]]; then
-           echo -en "${DY} $git_prompt"
+		echo -en "${DY} ($git_prompt)"
         elif [[ $git_status =~ "Your branch is behind" ]]; then
-           echo -en "${DP} $git_prompt"
+		echo -en "${DP} ($git_prompt)"
         elif [[ $git_status =~ "nothing to commit" ]]; then
-           echo -en "${DG} $git_prompt"
+		echo -en "${DG} ($git_prompt)"
         else 
-           echo -en "${DR} $git_prompt"
+		echo -en "${DR} ($git_prompt)"
    	fi
     fi
 }
