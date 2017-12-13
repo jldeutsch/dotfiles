@@ -78,6 +78,7 @@ function git_color() {
 		git_prompt="$head_symref"
 	else
 		git_prompt="$(git rev-parse HEAD)"
+		git_prompt=${git_prompt:0:8}
 	fi
 
 	if [[ $git_status =~ "Your branch is ahead of" ]]; then
