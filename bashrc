@@ -101,16 +101,7 @@ function console_swag() {
 }
 
 
-function det_head() {
-	local gitline=$(git rev-parse HEAD 2> /dev/null)
-	if [[ ${#gitline}>0 ]]; then
-		echo -en "${DY} $gitline"
-	fi
-}
-
-
- export PS1="\[$DC\]\u\[$DW\]@\[$DG\]\h\[$LC\]: \[$DY\]\w\$(console_swag)\$(git_color)\[$DY\]\n\$\[$ENDCOLOR\] "
-# export PS1="\[$DB\]\u@\h\[$DW\]:\$(det_head)\n "
+export PS1="\[$DC\]\u\[$DW\]@\[$DG\]\h\[$LC\]: \[$DY\]\w\$(console_swag)\$(git_color)\[$DY\]\n\$\[$ENDCOLOR\] "
 
 export CLICOLOR=1 # this makes ls show colors on a mac
 export LSCOLORS=ExFxBxDxCxegedabagacad # specifies colors for mac
