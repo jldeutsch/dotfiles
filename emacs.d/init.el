@@ -10,7 +10,7 @@
 
 ; loading themes
 (add-to-list 'custom-theme-load-path "~/.emacs.d/themes/")
-
+(load-theme 'tomorrow-night-eighties t)
 
 ;; -*- visual line wrap setting -*-
 
